@@ -1,0 +1,17 @@
+// firestore.rules
+// Firebase Console → Firestore Database → Rules хэсэгт энэ кодыг оруул
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // results collection — хэн ч унших/бичих боломжтой (public test)
+    match /results/{docId} {
+      allow read:  if true;
+      allow create: if request.resource.data.keys().hasAll(['name', 'topType', 'scores', 'createdAt'])
+                   && request.resource.data.name is string
+                   && request.resource.data.name.size() <= 50;
+      allow update, delete: if false;
+    }
+  }
+}

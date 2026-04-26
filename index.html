@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Миний Ирээдүйн Мэргэжил — RIASEC Тест</title>
+  <meta name="description" content="10 жилийн хүүхдүүдэд зориулсан мэргэжил сонголтын тест" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== INTRO SCREEN ===== -->
+  <div class="screen active" id="screen-intro">
+    <div class="wrap">
+      <div class="hero-emoji">🚀</div>
+      <h1 class="hero-title">Миний ирээдүйн мэргэжил</h1>
+      <p class="hero-sub">Хэдхэн асуултад хариулаад чамд тохирох мэргэжлийг олъё!</p>
+
+      <div class="type-icons">
+        <div class="type-icon-item"><span>🔧</span><small>Практик</small></div>
+        <div class="type-icon-item"><span>🔬</span><small>Судлаач</small></div>
+        <div class="type-icon-item"><span>🎨</span><small>Бүтээлч</small></div>
+        <div class="type-icon-item"><span>🤝</span><small>Нийгмийн</small></div>
+        <div class="type-icon-item"><span>👑</span><small>Удирдагч</small></div>
+        <div class="type-icon-item"><span>📋</span><small>Зохион байгуулагч</small></div>
+      </div>
+
+      <div class="intro-note">
+        👋 Сайн байна уу! Энэ тест 36 асуулттай.<br />
+        Дуртай зүйлдээ өндөр оноо өгөөрэй.<br />
+        <strong>Үнэн бодлоороо хариулаарай — буруу хариулт гэж байхгүй!</strong>
+      </div>
+
+      <div class="name-input-wrap">
+        <label for="student-name">Нэрээ оруулаарай:</label>
+        <input type="text" id="student-name" placeholder="Жишээ: Болд" maxlength="30" autocomplete="off" />
+      </div>
+
+      <button class="btn-primary" onclick="startTest()">Эхлэх ▶</button>
+    </div>
+  </div>
+
+  <!-- ===== QUESTION SCREEN ===== -->
+  <div class="screen" id="screen-main">
+    <div class="wrap">
+      <div class="q-num" id="q-num">1 / 36</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
+      </div>
+
+      <div class="q-card">
+        <div class="q-emoji" id="q-emoji">🔧</div>
+        <div class="q-text" id="q-text">Машин засах</div>
+        <div class="rating-row" id="rating-row"></div>
+        <div class="rating-hint">
+          <span>😣 Маш дургүй</span>
+          <span>🤩 Маш таалагддаг</span>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn-secondary" id="btn-prev" onclick="goBack()">← Буцах</button>
+        <button class="btn-primary" id="btn-next" onclick="goNext()" disabled>Дараах →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FOLLOW-UP SCREEN ===== -->
+  <div class="screen" id="screen-follow">
+    <div class="wrap">
+      <h2 class="follow-title">Нэмэлт асуулт</h2>
+      <p class="follow-sub" id="follow-sub">Дэлгэрэнгүй мэдмээр байна...</p>
+      <div id="follow-questions"></div>
+      <div class="nav-row" style="justify-content:flex-end">
+        <button class="btn-primary" onclick="showResults()">Үр дүн харах 🎉</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== RESULT SCREEN ===== -->
+  <div class="screen" id="screen-result">
+    <div class="wrap">
+      <div class="result-top">
+        <div class="result-emoji" id="r-emoji">🎨</div>
+        <h2 class="result-title" id="r-title">Бүтээлч хүн!</h2>
+        <span class="result-badge" id="r-badge">Artistic type</span>
+      </div>
+
+      <div class="result-desc" id="r-desc"></div>
+
+      <div class="section-label">Онооны хуваарилалт</div>
+      <div id="score-bars"></div>
+
+      <div class="section-label" style="margin-top:1.2rem">Тохирох мэргэжлүүд</div>
+      <div class="career-grid" id="career-grid"></div>
+
+      <div class="result-actions">
+        <button class="btn-secondary" onclick="resetTest()">🔄 Дахин тест өгөх</button>
+        <button class="btn-primary" onclick="saveResult()">💾 Хадгалах</button>
+      </div>
+
+      <div id="save-status" class="save-status"></div>
+    </div>
+  </div>
+
+  <!-- ===== LEADERBOARD SCREEN ===== -->
+  <div class="screen" id="screen-board">
+    <div class="wrap">
+      <h2 class="follow-title">🏆 Найзуудын үр дүн</h2>
+      <p class="follow-sub">Бусад хүүхдүүдийн мэргэжил харах</p>
+      <div id="board-list">Уншиж байна...</div>
+      <div class="nav-row" style="justify-content:center;margin-top:1.2rem">
+        <button class="btn-secondary" onclick="resetTest()">← Буцах</button>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="confetti" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999"></canvas>
+
+  <!-- Firebase SDK -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
