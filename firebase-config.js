@@ -5,10 +5,11 @@
 // 3. Доорх утгуудыг өөрийн project-ийн config-ээр солино уу
 
 export const firebaseConfig = {
-  apiKey:            "YOUR_API_KEY",
-  authDomain:        "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId:         "YOUR_PROJECT_ID",
-  storageBucket:     "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId:             "YOUR_APP_ID",
+  apiKey:            "AIzaSyCUOc-WSMK74VQpJSjvdBx28950yKL8dIk",
+  authDomain:        "career-plan-7186c.firebaseapp.com",
+  projectId:         "career-plan-7186c",
+  storageBucket:     "career-plan-7186c.firebasestorage.app",
+  messagingSenderId: "711957269072",
+  appId:             "1:711957269072:web:317d60a8882572b6c9df55",
+  measurementId:     "G-YD5B1DCECP",
 };
